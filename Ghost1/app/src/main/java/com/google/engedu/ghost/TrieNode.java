@@ -12,14 +12,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.google.engedu.ghost;
 
+import android.util.Log;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 
 public class TrieNode {
-    private HashMap<String, TrieNode> children;
+
+    private HashMap<Character, TrieNode> children;
     private boolean isWord;
 
     public TrieNode() {
@@ -28,17 +33,64 @@ public class TrieNode {
     }
 
     public void add(String s) {
+        TrieNode temppoint=this;
+        for(int i=0;i<s.length();i++) {
+            char letter = s.charAt(i);
+            if (temppoint.children.containsKey(letter)) {
+                temppoint = temppoint.children.get(letter);
+            } else {
+                TrieNode temp = new TrieNode();
+                temppoint.children.put(letter, temp);
+                temppoint = temp;
+            }
+
+        }
+        temppoint.isWord=true;
     }
 
     public boolean isWord(String s) {
-      return false;
+        TrieNode temppoint = this;
+        for (int i = 0; i < s.length(); i++) {
+            char letter = s.charAt(i);
+            if (temppoint.children.containsKey(letter)) {
+                temppoint = temppoint.children.get(letter);
+            }
+        }
+        if (temppoint.isWord == true) {
+            return true;
+        }
+        return false;
     }
 
     public String getAnyWordStartingWith(String s) {
-        return null;
+        TrieNode temppoint=this;
+
+        for(int i=0;i<s.length();i++){
+            char letter = s.charAt(i);
+            if (temppoint.children.containsKey(letter)) {
+                temppoint = temppoint.children.get(letter);
+            }
+            else{
+                return null;
+            }
+        }
+        if(temppoint.isWord==true){
+            return s;
+        }
+        String str=s;
+        while (!temppoint.isWord){
+            ArrayList<Character> keysarray = new ArrayList<>(temppoint.children.keySet());
+            Random rand= new Random();
+            Character c = keysarray.get(rand.nextInt(keysarray.size()));
+            str=str.concat(Character.toString(c));
+            temppoint=temppoint.children.get(c);
+        }
+        return str;
     }
 
-    public String getGoodWordStartingWith(String s) {
-        return null;
-    }
-}
+
+    public String getGoodWordStartingWith(String s,Boolean firstTurn) {
+
+       return null;
+
+}}

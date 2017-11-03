@@ -23,30 +23,30 @@ import java.io.InputStreamReader;
 
 public class FastDictionary implements GhostDictionary {
 
-    private TrieNode root;
+    private TrieNode temppoint;
 
     public FastDictionary(InputStream wordListStream) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(wordListStream));
-        root = new TrieNode();
+        temppoint = new TrieNode();
         String line = null;
         while((line = in.readLine()) != null) {
             String word = line.trim();
             if (word.length() >= MIN_WORD_LENGTH)
-                root.add(line.trim());
+                temppoint.add(line.trim());
         }
     }
     @Override
     public boolean isWord(String word) {
-        return root.isWord(word);
+        return temppoint.isWord(word);
     }
 
     @Override
     public String getAnyWordStartingWith(String prefix) {
-        return root.getAnyWordStartingWith(prefix);
+        return temppoint.getAnyWordStartingWith(prefix);
     }
 
     @Override
     public String getGoodWordStartingWith(String prefix,Boolean userturn) {
-        return root.getGoodWordStartingWith(prefix);
+        return temppoint.getGoodWordStartingWith(prefix,userturn);
     }
 }

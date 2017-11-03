@@ -56,7 +56,7 @@ public class GhostActivity extends AppCompatActivity {
 
         try {
             inputStream = assetManager.open("words.txt");
-            dictionary=new SimpleDictionary(inputStream);
+            dictionary=new FastDictionary(inputStream);
         }
         catch (IOException e){}
 
