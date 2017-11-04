@@ -87,10 +87,42 @@ public class TrieNode {
         }
         return str;
     }
+    public String getGoodWord(TrieNode root,String str,boolean turn) {
+        if (root==null)
+            return null;
+        for(Character c: root.children.keySet()) {
+            String temp = str+Character.toString(c);
+            if (root.isWord) {
+
+                if(turn)
+                    if(temp.length()%2==0){
+                        return temp;
+                    }
+                    else
+                    if(temp.length()%2!=0){
+                        return temp;
+                    }
+            }
+            return getGoodWord(root.children.get(c), temp, turn);
+        }
+        return null;
+    }
 
 
     public String getGoodWordStartingWith(String s,Boolean firstTurn) {
+        TrieNode temppoint=this;
 
-       return null;
+        for(int i=0;i<s.length();i++){
+            char letter = s.charAt(i);
+            if (temppoint.children.containsKey(letter)) {
+                temppoint = temppoint.children.get(letter);
+            }
+            else{
+                return null;
+            }
+        }
+        String word=getGoodWord(temppoint,s,firstTurn);
+
+       return word;
 
 }}

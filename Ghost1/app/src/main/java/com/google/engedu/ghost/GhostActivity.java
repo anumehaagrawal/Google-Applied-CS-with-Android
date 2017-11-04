@@ -72,14 +72,35 @@ public class GhostActivity extends AppCompatActivity {
                 String ghostword=ghostText.getText().toString();
                 if(ghostword.length()>=4 && dictionary.isWord(ghostword)){
                     label.setText("User Won");
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            onStart(null);
+                        }
+                    }, 3000);
 
                 }
                 String word=dictionary.getAnyWordStartingWith(ghostword);
                 if(word!=null){
                     label.setText("Computer won"+ " "+word);
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            onStart(null);
+                        }
+                    }, 3000);
                 }
                 else{
                     label.setText("User won");
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            onStart(null);
+                        }
+                    }, 3000);
                 }
 
             }
@@ -151,6 +172,14 @@ public class GhostActivity extends AppCompatActivity {
 
             Toast.makeText(this, ghostword, Toast.LENGTH_LONG).show();
             label.setText("Computer Won");
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    onStart(null);
+                }
+            }, 3000);
+
             return;
         }
 
@@ -158,6 +187,14 @@ public class GhostActivity extends AppCompatActivity {
         if (word == null) {
             Toast.makeText(this, "Cheaterr", Toast.LENGTH_SHORT).show();
             label.setText("Computer Won");
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    onStart(null);
+                }
+            }, 3000);
+
             return;
         }
 
@@ -166,6 +203,14 @@ public class GhostActivity extends AppCompatActivity {
         ghostText.setText(ghostword);
         if (dictionary.isWord(ghostword)) {
             label.setText("User won");
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    onStart(null);
+                }
+            }, 3000);
+
         } else {
 
 
